@@ -11,8 +11,8 @@ using SalesMvc.Data;
 namespace SalesMvc.Migrations
 {
     [DbContext(typeof(SalesMvcContext))]
-    [Migration("20220610191401_NewDb")]
-    partial class NewDb
+    [Migration("20220611103458_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
