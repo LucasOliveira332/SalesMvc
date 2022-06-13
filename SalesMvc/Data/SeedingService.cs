@@ -16,6 +16,11 @@ namespace SalesMvc.Data
                     DbContextOptions<SalesMvcContext>>()))
             {
 
+                if (context.Departments.Any())
+                {
+                    return;
+                }
+
                 Department d1 = new Department("Computers");
                 Department d2 = new Department("Electronics");
                 Department d3 = new Department("Fashion");

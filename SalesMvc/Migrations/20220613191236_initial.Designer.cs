@@ -12,7 +12,7 @@ using SalesMvc.Data;
 namespace SalesMvc.Migrations
 {
     [DbContext(typeof(SalesMvcContext))]
-    [Migration("20220613182237_initial")]
+    [Migration("20220613191236_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

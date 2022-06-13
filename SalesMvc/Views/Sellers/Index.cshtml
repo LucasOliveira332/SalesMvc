@@ -1,8 +1,29 @@
 ﻿
+@model IEnumerable<SalesMvc.Models.Seller>
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Sellers</h1>
 
-<p>Sellers index page</p>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.Name)</th>
+            <th>@Html.DisplayNameFor(x => x.Email)</th>
+            <th>@Html.DisplayNameFor(x => x.BirthData)</th>
+            <th>@Html.DisplayNameFor(x => x.BaseSalary)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => item.Name)</td>
+                <td>@Html.DisplayFor(x => item.Email)</td>
+                <td>@Html.DisplayFor(x => item.BirthData)</td>
+                <td>@Html.DisplayFor(x => item.BaseSalary)</td>
+            </tr>
+        }
+    </tbody>
+</table>

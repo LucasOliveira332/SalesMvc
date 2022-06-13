@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SalesMvc.Data;
+using SalesMvc.Models.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesMvcContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SalesMvcContext") ?? throw new InvalidOperationException("Connection string 'SalesMvcContext' not found.")));
@@ -15,6 +16,8 @@ using (var scope = app.Services.CreateScope())
 
     SeedingService.Initialize(services);
 }
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
