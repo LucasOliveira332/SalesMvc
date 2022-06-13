@@ -13,6 +13,7 @@
             <th>@Html.DisplayNameFor(x => x.Email)</th>
             <th>@Html.DisplayNameFor(x => x.BirthData)</th>
             <th>@Html.DisplayNameFor(x => x.BaseSalary)</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,11 @@
                 <td>@Html.DisplayFor(x => item.Email)</td>
                 <td>@Html.DisplayFor(x => item.BirthData)</td>
                 <td>@Html.DisplayFor(x => item.BaseSalary)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id=@item.Id>Edit</a>
+                    <a asp-action="Edit" asp-route-id=@item.Id>Datails</a>
+                    <a asp-action="Edit" asp-route-id=@item.Id>Remove</a>
+                </td>
             </tr>
         }
     </tbody>
