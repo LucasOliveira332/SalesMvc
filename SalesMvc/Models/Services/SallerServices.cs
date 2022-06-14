@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SalesMvc.Data;
-using System;
 using SalesMvc.Models;
 
 namespace SalesMvc.Models.Services
@@ -11,6 +10,12 @@ namespace SalesMvc.Models.Services
         public  List<Seller> FindAll(SalesMvcContext context)
         {
             return context.Sallers.ToList();
+        }
+
+        public void AddSaller(SalesMvcContext context, Seller seller)
+        {
+            context.Add(seller);
+            context.SaveChanges();
         }
     }
 }
