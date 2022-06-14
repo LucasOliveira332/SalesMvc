@@ -21,6 +21,7 @@ namespace SalesMvc.Models.Services
 
         public void AddSaller(Seller seller)
         {
+            seller.Dept = _context.Departments.First();
             _context.Add(seller);
             _context.SaveChanges();
         }

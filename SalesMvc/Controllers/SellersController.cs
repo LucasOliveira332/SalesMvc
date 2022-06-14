@@ -11,11 +11,15 @@ namespace SalesMvc.Controllers
 {
     public class SellersController : Controller
     {
+        private readonly SeedingService _seedingService;
         private readonly SallerServices _sallerService;
 
-        public SellersController(SallerServices sallerService)
+        public SellersController(SeedingService seedingService, SallerServices sallerService)
         {
+            _seedingService = seedingService;
             _sallerService = sallerService;
+
+            _seedingService.Seed();
         }
 
         public IActionResult Index()

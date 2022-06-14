@@ -12,7 +12,7 @@ using SalesMvc.Data;
 namespace SalesMvc.Migrations
 {
     [DbContext(typeof(SalesMvcContext))]
-    [Migration("20220613191236_initial")]
+    [Migration("20220614193657_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,11 +87,11 @@ namespace SalesMvc.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 

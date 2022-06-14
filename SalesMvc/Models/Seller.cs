@@ -1,10 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace SalesMvc.Models
 {
     public class Seller
     {
         public int Id { get; set; }
+
+        [Required]
+        [Column(TypeName = "varchar(50)")]
         public string Name { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(50)")]
         public string Email { get; set; }
         public DateTime BirthData { get; set; }
         public double BaseSalary { get; set; }
@@ -18,6 +26,7 @@ namespace SalesMvc.Models
 
         public Seller(string name, string email, DateTime birthData, double baseSalary, Department department)
         {
+            
             Name = name;
             Email = email;
             BirthData = birthData;

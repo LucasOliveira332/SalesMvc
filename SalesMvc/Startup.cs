@@ -20,6 +20,7 @@ namespace SalesMvc
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<SallerServices>();
+            services.AddScoped<SeedingService>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
@@ -65,6 +66,9 @@ namespace SalesMvc
             startup.Configure(app, app.Environment);
 
             app.Run();
+
+            return WebAppBuilder;
+
         }
     }
 
