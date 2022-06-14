@@ -11,18 +11,18 @@ namespace SalesMvc.Controllers
 {
     public class SellersController : Controller
     {
-        private readonly SalesMvcContext _context;
+        private readonly SallerServices _sallerService;
 
-        public SellersController(SalesMvcContext context)
+        public SellersController(SallerServices sallerService)
         {
-            _context = context;
+            _sallerService = sallerService;
         }
 
         public IActionResult Index()
         {
-            SallerServices saller = new SallerServices();
+            var list = _sallerService.FindAll();
 
-            return View(saller.FindAll(_context));
+            return View(list);
         }
 
         [HttpGet]
@@ -32,16 +32,11 @@ namespace SalesMvc.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Create(Seller seller)
         {
-            SallerServices sallerServices = new SallerServices();
-            sallerServices.AddSaller(_context, seller);
-            return RedirectToAction("Index");
+            _sallerService.AddSaller(seller);
+            return RedirectToAction(nameof(Index));
         }
 
     }
-
-    
-    
 }

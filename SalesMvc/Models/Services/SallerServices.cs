@@ -7,15 +7,22 @@ namespace SalesMvc.Models.Services
 {
     public class SallerServices
     {
-        public  List<Seller> FindAll(SalesMvcContext context)
+        private readonly SalesMvcContext _context;
+
+        public SallerServices(SalesMvcContext context)
         {
-            return context.Sallers.ToList();
+            _context = context;
         }
 
-        public void AddSaller(SalesMvcContext context, Seller seller)
+        public  List<Seller> FindAll()
         {
-            context.Add(seller);
-            context.SaveChanges();
+            return _context.Sallers.ToList();
+        }
+
+        public void AddSaller(Seller seller)
+        {
+            _context.Add(seller);
+            _context.SaveChanges();
         }
     }
 }
