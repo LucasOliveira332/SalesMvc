@@ -21,6 +21,8 @@ namespace SalesMvc
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<SallerServices>();
             services.AddScoped<SeedingService>();
+            services.AddScoped<DepartmentServices>();
+
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
@@ -57,7 +59,7 @@ namespace SalesMvc
     {
         public static WebApplicationBuilder UseStartup<TStartup>(this WebApplicationBuilder WebAppBuilder) where TStartup : IStartup
         {
-            var startup = Activator.CreateInstance(typeof(TStartup), WebAppBuilder.Configuration) as IStartup;
+            IStartup? startup = Activator.CreateInstance(typeof(TStartup), WebAppBuilder.Configuration) as IStartup;
             if (startup == null) throw new ArgumentException("Classe startup invalid");
 
             startup.ConfigureServices(WebAppBuilder.Services);

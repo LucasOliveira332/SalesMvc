@@ -16,12 +16,10 @@ namespace SalesMvc.Models.Services
 
         public  List<Seller> FindAll()
         {
-            return _context.Sallers.ToList();
+            return _context.Sellers!.ToList();
         }
-
         public void AddSaller(Seller seller)
         {
-            seller.Dept = _context.Departments.First();
             _context.Add(seller);
             _context.SaveChanges();
         }

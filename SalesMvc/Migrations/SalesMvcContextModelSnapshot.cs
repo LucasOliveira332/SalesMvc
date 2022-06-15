@@ -31,7 +31,6 @@ namespace SalesMvc.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -53,7 +52,7 @@ namespace SalesMvc.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SellerId")
+                    b.Property<int?>("SellerId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -80,44 +79,40 @@ namespace SalesMvc.Migrations
                     b.Property<DateTime>("BirthData")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DeptId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeptId");
+                    b.HasIndex("DepartmentId");
 
-                    b.ToTable("Sallers");
+                    b.ToTable("Sellers");
                 });
 
             modelBuilder.Entity("SalesMvc.Models.SalesRecord", b =>
                 {
                     b.HasOne("SalesMvc.Models.Seller", "Seller")
                         .WithMany("SalesRecords")
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SellerId");
 
                     b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("SalesMvc.Models.Seller", b =>
                 {
-                    b.HasOne("SalesMvc.Models.Department", "Dept")
+                    b.HasOne("SalesMvc.Models.Department", "Departments")
                         .WithMany("Sallers")
-                        .HasForeignKey("DeptId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Dept");
+                    b.Navigation("Departments");
                 });
 
             modelBuilder.Entity("SalesMvc.Models.Department", b =>

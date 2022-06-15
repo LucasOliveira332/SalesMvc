@@ -15,7 +15,7 @@ namespace SalesMvc.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -23,23 +23,23 @@ namespace SalesMvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sallers",
+                name: "Sellers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthData = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BaseSalary = table.Column<double>(type: "float", nullable: false),
-                    DeptId = table.Column<int>(type: "int", nullable: false)
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sallers", x => x.Id);
+                    table.PrimaryKey("PK_Sellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sallers_Departments_DeptId",
-                        column: x => x.DeptId,
+                        name: "FK_Sellers_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -54,17 +54,16 @@ namespace SalesMvc.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    SellerId = table.Column<int>(type: "int", nullable: false)
+                    SellerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesRecords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SalesRecords_Sallers_SellerId",
+                        name: "FK_SalesRecords_Sellers_SellerId",
                         column: x => x.SellerId,
-                        principalTable: "Sallers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "Sellers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -73,9 +72,9 @@ namespace SalesMvc.Migrations
                 column: "SellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sallers_DeptId",
-                table: "Sallers",
-                column: "DeptId");
+                name: "IX_Sellers_DepartmentId",
+                table: "Sellers",
+                column: "DepartmentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -84,7 +83,7 @@ namespace SalesMvc.Migrations
                 name: "SalesRecords");
 
             migrationBuilder.DropTable(
-                name: "Sallers");
+                name: "Sellers");
 
             migrationBuilder.DropTable(
                 name: "Departments");

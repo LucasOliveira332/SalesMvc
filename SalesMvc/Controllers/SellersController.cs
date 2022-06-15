@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SalesMvc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Models.Services;
 using SalesMvc.Data;
@@ -13,26 +10,29 @@ namespace SalesMvc.Controllers
     {
         private readonly SeedingService _seedingService;
         private readonly SallerServices _sallerService;
+        private readonly DepartmentServices _departmentServices;
 
-        public SellersController(SeedingService seedingService, SallerServices sallerService)
+        public SellersController(SeedingService seedingService, SallerServices sellerService, DepartmentServices departmentServices)
         {
             _seedingService = seedingService;
-            _sallerService = sallerService;
-
+            _sallerService = sellerService;
+            _departmentServices = departmentServices;
             _seedingService.Seed();
         }
 
         public IActionResult Index()
         {
             var list = _sallerService.FindAll();
-
             return View(list);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var departments = _departmentServices.FindAll();
+
+            var viewModel = new SellerViewModel{ Departments = departments};
+            return View(viewModel);
         }
 
         [HttpPost]
