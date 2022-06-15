@@ -32,14 +32,14 @@ namespace SalesMvc.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthData = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BaseSalary = table.Column<double>(type: "float", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                    DepartmentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sellers_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
+                        name: "FK_Sellers_Departments_DepartmentID",
+                        column: x => x.DepartmentID,
                         principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -54,27 +54,28 @@ namespace SalesMvc.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    SellerId = table.Column<int>(type: "int", nullable: true)
+                    SellerID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesRecords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SalesRecords_Sellers_SellerId",
-                        column: x => x.SellerId,
+                        name: "FK_SalesRecords_Sellers_SellerID",
+                        column: x => x.SellerID,
                         principalTable: "Sellers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesRecords_SellerId",
+                name: "IX_SalesRecords_SellerID",
                 table: "SalesRecords",
-                column: "SellerId");
+                column: "SellerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sellers_DepartmentId",
+                name: "IX_Sellers_DepartmentID",
                 table: "Sellers",
-                column: "DepartmentId");
+                column: "DepartmentID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

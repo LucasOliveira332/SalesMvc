@@ -20,9 +20,8 @@ namespace SalesMvc
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<SallerServices>();
-            services.AddScoped<SeedingService>();
             services.AddScoped<DepartmentServices>();
-
+            //services.AddScoped<SeedingService>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
@@ -57,6 +56,7 @@ namespace SalesMvc
 
     public static class StartupExtensions
     {
+
         public static WebApplicationBuilder UseStartup<TStartup>(this WebApplicationBuilder WebAppBuilder) where TStartup : IStartup
         {
             IStartup? startup = Activator.CreateInstance(typeof(TStartup), WebAppBuilder.Configuration) as IStartup;

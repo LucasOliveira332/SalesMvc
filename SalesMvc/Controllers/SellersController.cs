@@ -1,23 +1,23 @@
 ﻿using SalesMvc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Models.Services;
-using SalesMvc.Data;
 using SalesMvc.Models;
+using SalesMvc.Data;
 
 namespace SalesMvc.Controllers
 {
     public class SellersController : Controller
     {
-        private readonly SeedingService _seedingService;
+        //private readonly SeedingService _seedingService;
         private readonly SallerServices _sallerService;
         private readonly DepartmentServices _departmentServices;
 
-        public SellersController(SeedingService seedingService, SallerServices sellerService, DepartmentServices departmentServices)
+        public SellersController(SallerServices sellerService, DepartmentServices departmentServices/*SeedingService seedingService*/)
         {
-            _seedingService = seedingService;
             _sallerService = sellerService;
             _departmentServices = departmentServices;
-            _seedingService.Seed();
+            //_seedingService = seedingService;
+            //_seedingService.Seed();
         }
 
         public IActionResult Index()
@@ -31,7 +31,7 @@ namespace SalesMvc.Controllers
         {
             var departments = _departmentServices.FindAll();
 
-            var viewModel = new SellerViewModel{ Departments = departments};
+            var viewModel = new SellerViewModel { Departments = departments };
             return View(viewModel);
         }
 
@@ -39,6 +39,21 @@ namespace SalesMvc.Controllers
         public IActionResult Create(Seller seller)
         {
             _sallerService.AddSaller(seller);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Remove(int? id)
+        {
+            var sellerTemp = _sallerService.FindSeller(id);
+            return View(sellerTemp);
+
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int id)
+        {
+            _sallerService.RemoveSeller(id);
             return RedirectToAction(nameof(Index));
         }
 

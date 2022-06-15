@@ -1,0 +1,40 @@
+﻿@model SalesMvc.Models.Seller;
+@{
+    ViewData["Title"] = "Remove";
+}
+
+<div>
+    <h4>Seller</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>    
+            @Html.DisplayNameFor(x => x.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(x => x.Name)
+        </dd>
+        <dt>    
+            @Html.DisplayNameFor(x => x.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(x => x.Email)
+        </dd>
+        <dt>    
+            @Html.DisplayNameFor(x => x.BirthData)
+        </dt>
+        <dd>
+            @Html.DisplayFor(x => x.BirthData)
+        </dd>
+        <dt>    
+            @Html.DisplayNameFor(x => x.BaseSalary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(x => x.BaseSalary)
+        </dd>
+    </dl>
+    <form asp-action="Remove">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" asp-all-route-id="@Model.Id"  class="btn btn-danger" value="Remove"/> 
+        <a asp-action="Index">Cancel and return to Index</a>
+    </form>
+</div>

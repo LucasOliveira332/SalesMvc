@@ -12,7 +12,7 @@ using SalesMvc.Data;
 namespace SalesMvc.Migrations
 {
     [DbContext(typeof(SalesMvcContext))]
-    [Migration("20220615134826_initial")]
+    [Migration("20220615191520_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace SalesMvc.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("SellerId")
+                    b.Property<int>("SellerID")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -62,7 +62,7 @@ namespace SalesMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SellerId");
+                    b.HasIndex("SellerID");
 
                     b.ToTable("SalesRecords");
                 });
@@ -81,7 +81,7 @@ namespace SalesMvc.Migrations
                     b.Property<DateTime>("BirthData")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("DepartmentID")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -92,7 +92,7 @@ namespace SalesMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DepartmentID");
 
                     b.ToTable("Sellers");
                 });
@@ -101,7 +101,9 @@ namespace SalesMvc.Migrations
                 {
                     b.HasOne("SalesMvc.Models.Seller", "Seller")
                         .WithMany("SalesRecords")
-                        .HasForeignKey("SellerId");
+                        .HasForeignKey("SellerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Seller");
                 });
@@ -110,7 +112,7 @@ namespace SalesMvc.Migrations
                 {
                     b.HasOne("SalesMvc.Models.Department", "Departments")
                         .WithMany("Sallers")
-                        .HasForeignKey("DepartmentId")
+                        .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

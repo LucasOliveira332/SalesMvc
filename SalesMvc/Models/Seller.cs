@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SalesMvc.Models
+﻿namespace SalesMvc.Models
 {
     public class Seller
     {
@@ -12,7 +8,7 @@ namespace SalesMvc.Models
         public DateTime BirthData { get; set; }
         public double BaseSalary { get; set; }
         public Department? Departments { get; set; }
-        public int DepartmentId { get; set; }
+        public int DepartmentID { get; set; }
         public ICollection<SalesRecord> SalesRecords { get; set; } = new List<SalesRecord>();
 
         public Seller(){}

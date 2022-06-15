@@ -9,7 +9,7 @@ namespace SalesMvc.Models
         public double Amount { get; set; }
         public SaleStatus Status { get; set; }
         public Seller? Seller { get; set; }
-
+        public int SellerID { get; set; }
         public SalesRecord()
         {
         }
