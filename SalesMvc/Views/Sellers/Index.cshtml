@@ -5,7 +5,7 @@
 }
 
 <h1>Sellers</h1>
-<a asp-action="Create" class="btn btn-light">Create</a>
+<a asp-action="Create" class="btn btn-primary">Create</a>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -26,7 +26,7 @@
                 <td>@Html.DisplayFor(x => item.BaseSalary)</td>
                 <td>
                     <a asp-action="Edit" asp-route-id=@item.Id>Edit</a>
-                    <a asp-action="Datails" asp-route-id=@item.Id>Datails</a>
+                    <a asp-action="Details" asp-route-id=@item.Id>Datails</a>
                     <a asp-action="Remove" asp-route-id=@item.Id>Remove</a>
                 </td>
             </tr>

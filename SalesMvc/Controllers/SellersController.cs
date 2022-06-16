@@ -8,16 +8,16 @@ namespace SalesMvc.Controllers
 {
     public class SellersController : Controller
     {
-        //private readonly SeedingService _seedingService;
+        private readonly SeedingService _seedingService;
         private readonly SallerServices _sallerService;
         private readonly DepartmentServices _departmentServices;
 
-        public SellersController(SallerServices sellerService, DepartmentServices departmentServices/*SeedingService seedingService*/)
+        public SellersController(SallerServices sellerService, DepartmentServices departmentServices,SeedingService seedingService)
         {
             _sallerService = sellerService;
             _departmentServices = departmentServices;
-            //_seedingService = seedingService;
-            //_seedingService.Seed();
+            _seedingService = seedingService;
+            _seedingService.Seed();
         }
 
         public IActionResult Index()
@@ -45,8 +45,8 @@ namespace SalesMvc.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            var sellerTemp = _sallerService.FindSeller(id);
-            return View(sellerTemp);
+            var findSeller = _sallerService.FindSeller(id);
+            return View(findSeller);
 
         }
 
@@ -55,6 +55,12 @@ namespace SalesMvc.Controllers
         {
             _sallerService.RemoveSeller(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Details(int? id)
+        {
+           var findSeller = _sallerService.FindSeller(id);
+            return View(findSeller);
         }
 
     }

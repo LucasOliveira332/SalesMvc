@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using SalesMvc.Data;
-using SalesMvc.Models;
+﻿using SalesMvc.Data;
 
 namespace SalesMvc.Models.Services
 {
@@ -20,7 +17,7 @@ namespace SalesMvc.Models.Services
         }
         public void AddSaller(Seller seller)
         {
-            _context.Add(seller);
+            _context.Sellers.Add(seller);
             _context.SaveChanges();
         }
 
