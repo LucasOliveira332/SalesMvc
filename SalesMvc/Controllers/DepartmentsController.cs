@@ -6,16 +6,16 @@ namespace SalesMvc
 {
     public class DepartmentsController : Controller
     {
-        private readonly DepartmentServices _departmentService;
+        private readonly DepartmentServices _departmentServices;
 
-        public DepartmentsController(DepartmentServices departmentService)
+        public DepartmentsController(DepartmentServices departmentServices)
         {
-            _departmentService = departmentService;
+            _departmentServices = departmentServices;
         }
 
         public IActionResult Index()
         {
-           var list =  _departmentService.FindAll();
+           var list =  _departmentServices.FindAll();
             return View(list);
         }
 
@@ -28,22 +28,22 @@ namespace SalesMvc
         [HttpPost]
         public IActionResult Create(Department department)
         {
-            _departmentService.AddDepartment(department);
+            _departmentServices.AddDepartment(department);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            //var findSeller = _sallerService.FindSeller(id);
-            return View();
+            var findDepartment = _departmentServices.FindDepartment(id);
+            return View(findDepartment);
 
         }
 
         [HttpPost]
         public IActionResult Remove(int id)
         {
-            //_sallerService.RemoveSeller(id);
+            _departmentServices.RemoveDepartment(id);
             return RedirectToAction(nameof(Index));
         }
     }

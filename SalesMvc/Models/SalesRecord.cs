@@ -1,5 +1,5 @@
 ﻿using SalesMvc.Models.Enums;
-using SalesMvc.Models;
+
 namespace SalesMvc.Models
 {
     public class SalesRecord

@@ -13,7 +13,7 @@ namespace SalesMvc.Models.Services
 
         public  List<Seller> FindAll()
         {
-            return _context.Sellers!.ToList();
+            return _context.Sellers!.OrderBy(x => x.Name).ToList();
         }
         public void AddSaller(Seller seller)
         {
@@ -37,6 +37,8 @@ namespace SalesMvc.Models.Services
 
             _context.Remove(removeSeller);
             _context.SaveChanges();
+
+
         }
     }
 }

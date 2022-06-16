@@ -1,9 +1,12 @@
 ﻿using SalesMvc.Data;
+using SalesMvc.Models;
 
 namespace SalesMvc.Models.Services
 {
+
     public class DepartmentServices
     {
+
         private readonly SalesMvcContext _context;
         public DepartmentServices(SalesMvcContext context)
         {
@@ -20,27 +23,28 @@ namespace SalesMvc.Models.Services
             _context.SaveChanges();
         }
 
-        public Seller FindDepartment(int? id)
+        public Department FindDepartment(int? id)
         {
-            Seller? x = _context.Sellers?.FirstOrDefault(x => x.Id == id);
-            return x!;
+            var department = _context.Departments.FirstOrDefault(x => x.Id == id);
+            return department;
         }
 
         public void RemoveDepartment(int id)
         {
-            var removeDepartment = _context.Departments?.FirstOrDefault(x => x.Id == id);
+            var removeSeller = _context.Sellers?.Where(x => x.DepartmentID == id).ToList();
 
-            var removeSeller = _context.Sellers?.Where(x => x.DepartmentID == id);
-
-            var removeSalesRecord = _context.SalesRecords?.Where(x => x.SellerID.Equals(removeSeller));
-
-            _context.SalesRecords.RemoveRange(removeSalesRecord);
-            _context.SaveChanges();
-
+            foreach (var item in removeSeller)
+            {
+                var salesRecord = _context.SalesRecords?.Where(x => x.SellerID == item.Id);
+                _context.SalesRecords.RemoveRange(salesRecord);
+                _context.SaveChanges();
+            }
+            
             _context.Sellers.RemoveRange(removeSeller);
             _context.SaveChanges();
 
-            _context.Remove(removeDepartment);
+            var removeDepartment = _context.Departments?.FirstOrDefault(x => x.Id == id);
+            _context.Departments.Remove(removeDepartment);
             _context.SaveChanges();
         }
     }
