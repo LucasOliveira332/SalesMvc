@@ -17,16 +17,15 @@ namespace SalesMvc.Models.Services
             return _context.Departments!.OrderBy(x => x.Name).ToList();
         }
 
+        public Department FindDepartment(int? id)
+        {
+            return _context.Departments!.FirstOrDefault(x => x.Id == id);
+        }
+
         public void AddDepartment(Department department)
         {
             _context.Departments.Add(department);
             _context.SaveChanges();
-        }
-
-        public Department FindDepartment(int? id)
-        {
-            var department = _context.Departments.FirstOrDefault(x => x.Id == id);
-            return department;
         }
 
         public void RemoveDepartment(int id)

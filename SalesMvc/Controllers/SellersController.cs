@@ -59,8 +59,13 @@ namespace SalesMvc.Controllers
 
         public IActionResult Details(int? id)
         {
-           var findSeller = _sallerService.FindSeller(id);
-            return View(findSeller);
+            
+            var seller = _sallerService.FindSeller(id);
+
+            var department = _departmentServices.FindDepartment(seller.DepartmentID);
+
+            var viewModel = new SellerViewModel {Seller = seller, Department = department };
+            return View(viewModel);
         }
 
     }

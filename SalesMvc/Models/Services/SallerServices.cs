@@ -13,7 +13,7 @@ namespace SalesMvc.Models.Services
 
         public  List<Seller> FindAll()
         {
-            return _context.Sellers!.OrderBy(x => x.Name).ToList();
+            return  _context.Sellers!.OrderBy(x => x.Name).ToList();
         }
         public void AddSaller(Seller seller)
         {

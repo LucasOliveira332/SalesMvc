@@ -34,8 +34,7 @@
             SalesRecords.Remove(salesRecord);
         }
 
-        public double TotalSales(DateTime Initial,
-                                 DateTime End)
+        public double TotalSales(DateTime Initial, DateTime End)
         {
             return SalesRecords.Sum(x => x.Amount);
         }
