@@ -19,9 +19,10 @@ namespace SalesMvc
             options.UseSqlServer(Configuration.GetConnectionString("SalesMvcContext") ?? throw new InvalidOperationException("Connection string 'SalesMvcContext' not found.")));
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddScoped<SallerServices>();
+            services.AddScoped<SellerServices>();
             services.AddScoped<DepartmentServices>();
-            services.AddScoped<SeedingService>();
+            services.AddScoped<SeedingServices>();
+            services.AddScoped<SalesRecordServices>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)

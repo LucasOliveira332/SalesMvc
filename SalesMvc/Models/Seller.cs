@@ -7,20 +7,22 @@
         public string? Email { get; set; }
         public DateTime BirthData { get; set; }
         public double BaseSalary { get; set; }
-        public Department? Departments { get; set; }
+        public Department Department { get; set; }
         public int DepartmentID { get; set; }
         public ICollection<SalesRecord> SalesRecords { get; set; } = new List<SalesRecord>();
 
-        public Seller(){}
+        public Seller()
+        {
+        }
 
         public Seller(string name, string email, DateTime birthData, double baseSalary, Department department)
         {
-            
+
             Name = name;
             Email = email;
             BirthData = birthData;
             BaseSalary = baseSalary;
-            Departments = department;
+            Department = department;
 
         }
 

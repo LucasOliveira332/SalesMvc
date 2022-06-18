@@ -14,12 +14,12 @@ namespace SalesMvc.Models.Services
         }
         public List<Department> FindAll()
         {
-            return _context.Departments!.OrderBy(x => x.Name).ToList();
+            return _context.Departments.OrderBy(x => x.Name).ToList();
         }
 
         public Department FindDepartment(int? id)
         {
-            return _context.Departments!.FirstOrDefault(x => x.Id == id);
+            return _context.Departments.FirstOrDefault(x => x.Id == id);
         }
 
         public void AddDepartment(Department department)
@@ -34,8 +34,8 @@ namespace SalesMvc.Models.Services
 
             foreach (var item in removeSeller)
             {
-                var salesRecord = _context.SalesRecords?.Where(x => x.SellerID == item.Id);
-                _context.SalesRecords.RemoveRange(salesRecord);
+                var salesRecords = _context.SalesRecords.Where(x => x.SellerID == item.Id);
+                _context.SalesRecords.RemoveRange(salesRecords);
                 _context.SaveChanges();
             }
             

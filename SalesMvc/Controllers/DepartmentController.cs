@@ -4,19 +4,19 @@ using SalesMvc.Models.Services;
 
 namespace SalesMvc
 {
-    public class DepartmentsController : Controller
+    public class DepartmentController : Controller
     {
         private readonly DepartmentServices _departmentServices;
 
-        public DepartmentsController(DepartmentServices departmentServices)
+        public DepartmentController(DepartmentServices departmentServices)
         {
             _departmentServices = departmentServices;
         }
 
         public IActionResult Index()
         {
-           var list =  _departmentServices.FindAll();
-            return View(list);
+           var listDepartments =  _departmentServices.FindAll();
+            return View(listDepartments);
         }
 
         [HttpGet]

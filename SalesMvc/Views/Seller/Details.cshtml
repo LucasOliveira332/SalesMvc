@@ -1,0 +1,21 @@
+﻿@model SalesMvc.Models.Seller
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h2>Details</h2>
+    <dl class="row">
+        <dt>@Html.DisplayNameFor(x=> x.Name)</dt>
+        <dd>@Html.DisplayFor(x=> x.Name)</dd>
+        <dt>@Html.DisplayNameFor(x=> x.Email)</dt>
+        <dd>@Html.DisplayFor(x=> x.Email)</dd>
+        <dt>@Html.DisplayNameFor(x=> x.BirthData)</dt>
+        <dd>@Html.DisplayFor(x=> x.BirthData)</dd>
+        <dt>@Html.DisplayNameFor(x=> x.BaseSalary)</dt>
+        <dd>@Html.DisplayFor(x=> x.BaseSalary)</dd>
+        <dt>Department</dt>
+        <dd>@Html.DisplayFor(x=> x.Department.Name)</dd>
+    </dl>
+    <a asp-action="Index" class="btn btn-success">Return to list</a>
+</div>
