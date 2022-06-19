@@ -41,6 +41,24 @@ namespace SalesMvc.Controllers
         }
 
         [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            var listDepartments = _departmentServices.FindAll();
+            var seller = _sellerServices.FindSeller(id);
+            var listDepartmentsAndSeller = new SellerViewModel() { Seller = seller, Departments = listDepartments } ;
+            return View(listDepartmentsAndSeller);
+
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Seller seller)
+        {
+            _sellerServices.EditSeller(seller);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
         public IActionResult Remove(int? id)
         {
             var seller = _sellerServices.FindSeller(id);

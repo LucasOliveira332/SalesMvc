@@ -12,8 +12,8 @@ using SalesMvc.Data;
 namespace SalesMvc.Migrations
 {
     [DbContext(typeof(SalesMvcContext))]
-    [Migration("20220615191520_initial")]
-    partial class initial
+    [Migration("20220619154410_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,7 +78,7 @@ namespace SalesMvc.Migrations
                     b.Property<double>("BaseSalary")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("BirthData")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DepartmentID")
@@ -110,13 +110,13 @@ namespace SalesMvc.Migrations
 
             modelBuilder.Entity("SalesMvc.Models.Seller", b =>
                 {
-                    b.HasOne("SalesMvc.Models.Department", "Departments")
+                    b.HasOne("SalesMvc.Models.Department", "Department")
                         .WithMany("Sallers")
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Departments");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("SalesMvc.Models.Department", b =>

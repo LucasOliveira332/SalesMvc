@@ -29,6 +29,12 @@ namespace SalesMvc.Models.Services
             return x;
         }
 
+        public void EditSeller(Seller seller)
+        {
+            var editSeller = _context.Sellers.Update(seller);
+            _context.SaveChanges();
+        }
+
         public void RemoveSeller(int id)
         {
             var removeSeller = _context.Sellers.FirstOrDefault(x => x.Id == id);

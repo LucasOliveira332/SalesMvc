@@ -25,19 +25,6 @@ namespace SalesMvc.Models.Services
         {
             return _context.SalesRecords.Where(x => x.Date >= inital && x.Date <= end).Include(x=> x.Seller).ToList();
         }
-
-        public void AddSale(SalesRecord salesRecord)
-        {
-            _context.SalesRecords.Add(salesRecord);
-            _context.SaveChanges();
-        }
-
-        public void RemoveSale(int id)
-        {
-            var sale = _context.SalesRecords.Find(id);
-            _context.SalesRecords.Remove(sale);
-            _context.SaveChanges();
-        }
     }
 }
 
