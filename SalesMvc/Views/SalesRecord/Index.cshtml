@@ -7,9 +7,15 @@
 <div>
     <h2>Sales</h2>
     <form asp-action="Index">
-           <input type="date" class="form-control"  name="minDate" id="minDate"/>
-           <input type="date" class="form-control"  name="maxDate" id="maxDate"/>
-           <input class="btn btn-light mt-2 form" type="submit" value="Find"/>
+        <div class="date">
+            <label>Min Date</label>
+            <input type="date" class="form-control"  name="minDate" id="minDate"/>
+        </div>
+        <div class="date">
+            <label>Max Date</label>
+            <input type="date" class="form-control"  name="maxDate" id="maxDate"/>
+        </div>
+           <input class="btn btn-light mt-2 btn-submit" type="submit" value="Find"/>
     </form>
 
     <table class="table table-striped table-hover">

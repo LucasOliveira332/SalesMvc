@@ -17,18 +17,18 @@ namespace SalesMvc.Models.Services
             return _context.Departments.OrderBy(x => x.Name).ToList();
         }
 
-        public Department FindDepartment(int? id)
+        public Department Find(int? id)
         {
             return _context.Departments.FirstOrDefault(x => x.Id == id);
         }
 
-        public void AddDepartment(Department department)
+        public void Add(Department department)
         {
             _context.Departments.Add(department);
             _context.SaveChanges();
         }
 
-        public void RemoveDepartment(int id)
+        public void Remove(int id)
         {
             var removeSeller = _context.Sellers?.Where(x => x.DepartmentID == id).ToList();
 

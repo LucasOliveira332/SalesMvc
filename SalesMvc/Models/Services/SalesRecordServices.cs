@@ -17,7 +17,7 @@ namespace SalesMvc.Models.Services
             return _context.SalesRecords.Include(x => x.Seller).OrderBy(x => x.Seller.Name).ToList();
         }
 
-        public SalesRecord FindSale(int? id)
+        public SalesRecord Find(int? id)
         {
             return _context.SalesRecords.Find(id);
         }

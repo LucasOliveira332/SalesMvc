@@ -36,7 +36,7 @@ namespace SalesMvc.Controllers
         [HttpPost]
         public IActionResult Create(Seller seller)
         {
-            _sellerServices.AddSaller(seller);
+            _sellerServices.Add(seller);
             return RedirectToAction(nameof(Index));
         }
 
@@ -44,7 +44,7 @@ namespace SalesMvc.Controllers
         public IActionResult Edit(int? id)
         {
             var listDepartments = _departmentServices.FindAll();
-            var seller = _sellerServices.FindSeller(id);
+            var seller = _sellerServices.Find(id);
             var listDepartmentsAndSeller = new SellerViewModel() { Seller = seller, Departments = listDepartments } ;
             return View(listDepartmentsAndSeller);
 
@@ -53,7 +53,7 @@ namespace SalesMvc.Controllers
         [HttpPost]
         public IActionResult Edit(Seller seller)
         {
-            _sellerServices.EditSeller(seller);
+            _sellerServices.Edit(seller);
 
             return RedirectToAction(nameof(Index));
         }
@@ -61,7 +61,7 @@ namespace SalesMvc.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            var seller = _sellerServices.FindSeller(id);
+            var seller = _sellerServices.Find(id);
             return View(seller);
 
         }
@@ -69,13 +69,13 @@ namespace SalesMvc.Controllers
         [HttpPost]
         public IActionResult Remove(int id)
         {
-            _sellerServices.RemoveSeller(id);
+            _sellerServices.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Details(int? id)
         {
-            var seller = _sellerServices.FindSeller(id);
+            var seller = _sellerServices.Find(id);
             return View(seller);
         }
 

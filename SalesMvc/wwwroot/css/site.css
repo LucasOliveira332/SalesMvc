@@ -1,18 +1,41 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+/* Sales */
+.form-control {
+}
+
+.date {
+    width: 300px;
+    float: left;
+    margin-right: 40px;
+}
+
+.btn-submit {
+    position: relative;
+    top: 16px;
+    right: 30px;
+    color: white;
+    background: #C7D1CF;
+}
+
+.btn-submit:hover {
+    background: #8DD9C8;
+    color: white;
 }

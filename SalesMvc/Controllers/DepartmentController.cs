@@ -28,14 +28,14 @@ namespace SalesMvc
         [HttpPost]
         public IActionResult Create(Department department)
         {
-            _departmentServices.AddDepartment(department);
+            _departmentServices.Add(department);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            var findDepartment = _departmentServices.FindDepartment(id);
+            var findDepartment = _departmentServices.Find(id);
             return View(findDepartment);
 
         }
@@ -43,7 +43,7 @@ namespace SalesMvc
         [HttpPost]
         public IActionResult Remove(int id)
         {
-            _departmentServices.RemoveDepartment(id);
+            _departmentServices.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }
