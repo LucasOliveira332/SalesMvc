@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SalesMvc.Models.Services
 {
-    public class SalesRecordServices { 
+    public class SalesRecordServices
+    {
         private readonly SalesMvcContext _context;
 
         public SalesRecordServices(SalesMvcContext context)
@@ -21,9 +22,9 @@ namespace SalesMvc.Models.Services
             return _context.SalesRecords.Find(id);
         }
 
-        public List<SalesRecord> FindSalesPerDate(DateTime inital, DateTime end)
+        public List<SalesRecord> FindByDate(DateTime minDate, DateTime maxDate)
         {
-            return _context.SalesRecords.Where(x => x.Date >= inital && x.Date <= end).Include(x=> x.Seller).ToList();
+            return _context.SalesRecords.Where(x => x.Date >= minDate && x.Date <= maxDate).Include(x => x.Seller).ToList();
         }
     }
 }

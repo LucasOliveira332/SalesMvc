@@ -19,17 +19,15 @@ namespace SalesMvc.Controllers
         public IActionResult Index()
         {
             var listSalesRecords = _salesRecordServices.FindAll();
-            var salesViewModel = new SalesViewModel() { Sales = listSalesRecords };
-            return View(salesViewModel);
+            return View(listSalesRecords);
         }
 
         [HttpPost]
-        public IActionResult Index(SalesViewModel salesViewModel)
+        public IActionResult Index(DateTime minDate, DateTime maxDate)
         {
-           var FindSalesPerDate = _salesRecordServices.FindSalesPerDate(salesViewModel.InitialDate, salesViewModel.FinalDate).ToList();
+           var FindSalesPerDate = _salesRecordServices.FindByDate(minDate,maxDate);
 
-            salesViewModel = new SalesViewModel() { Sales = FindSalesPerDate };
-            return View(salesViewModel);
+            return View(FindSalesPerDate);
         }
 
     }

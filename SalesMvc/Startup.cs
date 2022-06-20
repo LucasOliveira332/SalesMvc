@@ -21,8 +21,8 @@ namespace SalesMvc
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<SellerServices>();
             services.AddScoped<DepartmentServices>();
-            services.AddScoped<SeedingServices>();
             services.AddScoped<SalesRecordServices>();
+            services.AddScoped<SeedingServices>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
@@ -32,8 +32,6 @@ namespace SalesMvc
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
