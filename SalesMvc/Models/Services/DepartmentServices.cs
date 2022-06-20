@@ -4,7 +4,7 @@ using SalesMvc.Models;
 namespace SalesMvc.Models.Services
 {
 
-    public class DepartmentServices
+    public class DepartmentServices 
     {
 
         private readonly SalesMvcContext _context;

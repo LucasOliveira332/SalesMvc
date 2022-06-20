@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using SalesMvc.Contracts;
 using SalesMvc.Data;
 using SalesMvc.Models.Services;
 
@@ -19,7 +20,8 @@ namespace SalesMvc
             options.UseSqlServer(Configuration.GetConnectionString("SalesMvcContext") ?? throw new InvalidOperationException("Connection string 'SalesMvcContext' not found.")));
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddScoped<SellerServices>();
+
+            services.AddScoped<ISellerService, SellerServices>();
             services.AddScoped<DepartmentServices>();
             services.AddScoped<SalesRecordServices>();
             services.AddScoped<SeedingServices>();

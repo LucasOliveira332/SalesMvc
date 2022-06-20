@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SalesMvc.Contracts;
 using SalesMvc.Data;
 
 namespace SalesMvc.Models.Services
 {
-    public class SellerServices
+    public class SellerServices : ISellerService
     {
         private readonly SalesMvcContext _context;
 
@@ -29,8 +30,16 @@ namespace SalesMvc.Models.Services
 
         public void Edit(Seller seller)
         {
-            var editSeller = _context.Sellers.Update(seller);
-            _context.SaveChanges();
+            try
+            {
+                var editSeller = _context.Sellers.Update(seller);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
 
         public void Remove(int id)

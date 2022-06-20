@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Models.Services;
 using SalesMvc.Models;
+using SalesMvc.Contracts;
 
 namespace SalesMvc.Controllers
 {
@@ -9,10 +10,10 @@ namespace SalesMvc.Controllers
     public class SellerController : Controller
     {
 
-        private readonly SellerServices _sellerServices;
+        private readonly ISellerService _sellerServices;
         private readonly DepartmentServices _departmentServices;
 
-        public SellerController(SellerServices sellerServices, DepartmentServices departmentServices)
+        public SellerController(ISellerService sellerServices, DepartmentServices departmentServices)
         {
             _sellerServices = sellerServices;
             _departmentServices = departmentServices;
@@ -36,6 +37,10 @@ namespace SalesMvc.Controllers
         [HttpPost]
         public IActionResult Create(Seller seller)
         {
+            if(seller == null)
+            {
+                return NotFound();
+            }
             _sellerServices.Add(seller);
             return RedirectToAction(nameof(Index));
         }
