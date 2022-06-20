@@ -8,9 +8,9 @@ namespace SalesMvc.Controllers
     public class SalesRecordController : Controller
     {
 
-        private readonly SalesRecordServices _salesRecordServices;
+        private readonly SalesRecordService _salesRecordServices;
 
-        public SalesRecordController(SalesRecordServices  salesRecordServices)
+        public SalesRecordController(SalesRecordService  salesRecordServices)
         {
             _salesRecordServices = salesRecordServices;
         }

@@ -14,14 +14,5 @@
         {
             Name = name;
         }
-
-        public void AddSaller(Seller saller)
-        {
-            Sallers.Add(saller);
-        }
-        public double TotalSales(DateTime initial, DateTime end)
-        {
-           return Sallers.Sum(x => x.TotalSales(initial, end));
-        }
     }
 }

@@ -4,11 +4,11 @@ using SalesMvc.Data;
 
 namespace SalesMvc.Models.Services
 {
-    public class SellerServices : ISellerService
+    public class SellerService : ISellerService
     {
         private readonly SalesMvcContext _context;
 
-        public SellerServices(SalesMvcContext context)
+        public SellerService(SalesMvcContext context)
         {
             _context = context;
         }

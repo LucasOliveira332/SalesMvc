@@ -21,10 +21,10 @@ namespace SalesMvc
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddScoped<ISellerService, SellerServices>();
-            services.AddScoped<DepartmentServices>();
-            services.AddScoped<SalesRecordServices>();
-            services.AddScoped<SeedingServices>();
+            services.AddScoped<ISellerService, SellerService>();
+            services.AddScoped<Models.Services.DepartmentService>();
+            services.AddScoped<SalesRecordService>();
+            services.AddScoped<SeedingService>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)

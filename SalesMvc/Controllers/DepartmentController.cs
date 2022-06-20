@@ -6,16 +6,16 @@ namespace SalesMvc
 {
     public class DepartmentController : Controller
     {
-        private readonly DepartmentServices _departmentServices;
+        private readonly DepartmentService _departmentService;
 
-        public DepartmentController(DepartmentServices departmentServices)
+        public DepartmentController(DepartmentService departmentService)
         {
-            _departmentServices = departmentServices;
+            _departmentService = departmentService;
         }
 
         public IActionResult Index()
         {
-           var listDepartments =  _departmentServices.FindAll();
+           var listDepartments =  _departmentService.FindAll();
             return View(listDepartments);
         }
 
@@ -28,22 +28,37 @@ namespace SalesMvc
         [HttpPost]
         public IActionResult Create(Department department)
         {
-            _departmentServices.Add(department);
+            _departmentService.Add(department);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            var findDepartment = _departmentServices.Find(id);
-            return View(findDepartment);
-
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var department = _departmentService.FindById((int)id);
+            if(department != null)
+            {
+                var findDepartment = _departmentService.FindById((int)id);
+                return View(findDepartment);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
         public IActionResult Remove(int id)
         {
-            _departmentServices.Remove(id);
+            var department = _departmentService.FindById(id);
+            if (department != null)
+            {
+                _departmentService.Remove(department);
+            }
             return RedirectToAction(nameof(Index));
         }
     }

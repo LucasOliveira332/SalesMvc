@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SalesMvc.Models.Services
 {
-    public class SalesRecordServices
+    public class SalesRecordService
     {
         private readonly SalesMvcContext _context;
 
-        public SalesRecordServices(SalesMvcContext context)
+        public SalesRecordService(SalesMvcContext context)
         {
             _context = context;
         }

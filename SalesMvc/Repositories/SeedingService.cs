@@ -4,12 +4,12 @@ using SalesMvc.Data;
 namespace SalesMvc.Models.Services
 {
 
-    public class SeedingServices
+    public class SeedingService
     {
 
         private readonly SalesMvcContext _context;
 
-        public SeedingServices(SalesMvcContext context)
+        public SeedingService(SalesMvcContext context)
         {
             _context = context;
         }

@@ -10,9 +10,9 @@ namespace SalesMvc.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
-        private readonly SeedingServices _seedingServices;
+        private readonly SeedingService _seedingServices;
 
-        public HomeController(ILogger<HomeController> logger, SeedingServices seedingServices)
+        public HomeController(ILogger<HomeController> logger, SeedingService seedingServices)
         {
             _logger = logger;
             _seedingServices = seedingServices;
