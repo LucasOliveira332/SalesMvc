@@ -1,6 +1,7 @@
 ﻿using SalesMvc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using SalesMvc.Models.Services;
+using System.Diagnostics;
+using SalesMvc.Contracts;
 
 namespace SalesMvc.Controllers
 {
@@ -8,9 +9,9 @@ namespace SalesMvc.Controllers
     public class SalesRecordController : Controller
     {
 
-        private readonly SalesRecordService _salesRecordServices;
+        private readonly ISalesRecordService _salesRecordServices;
 
-        public SalesRecordController(SalesRecordService  salesRecordServices)
+        public SalesRecordController(ISalesRecordService salesRecordServices)
         {
             _salesRecordServices = salesRecordServices;
         }
@@ -19,6 +20,10 @@ namespace SalesMvc.Controllers
         public IActionResult Index()
         {
             var listSalesRecords = _salesRecordServices.FindAll();
+            if (!listSalesRecords.Any())
+            {
+                return RedirectToAction(nameof(Error), new { message = "There are no registred Sales" });
+            }
             return View(listSalesRecords);
         }
 
@@ -28,6 +33,11 @@ namespace SalesMvc.Controllers
            var FindSalesPerDate = _salesRecordServices.FindByDate(minDate,maxDate);
 
             return View(FindSalesPerDate);
+        }
+
+        public IActionResult Error(string message)
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, Message = message });
         }
 
     }

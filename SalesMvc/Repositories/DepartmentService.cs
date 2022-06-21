@@ -15,43 +15,16 @@ namespace SalesMvc.Models.Services
         }
         public List<Department> FindAll()
         {
-            return _context.Departments.OrderBy(x => x.Name).ToList();
-        }
-
-        public Department FindById(int id)
-        {
-            return _context.Departments.FirstOrDefault(x => x.Id == id);
-        }
-
-        public void Add(Department department)
-        {
-            _context.Departments.Add(department);
-            _context.SaveChanges();
-        }
-
-        public void Remove(Department department)
-        {
-
-            var removeSeller = _context.Sellers.Where(x => x.DepartmentID == department.Id).ToList();
-
-            if(removeSeller != null)
+            var result = _context.Departments!.OrderBy(x => x.Name).ToList();
+            if (result.Any())
             {
-                foreach (var item in removeSeller)
-                {
-                    var salesRecords = _context.SalesRecords.Where(x => x.SellerID == item.Id);
-                    if(salesRecords != null)
-                    {
-                        _context.SalesRecords.RemoveRange(salesRecords);
-                        _context.SaveChanges();
-                    }
-                    
-                }
-                _context.Sellers.RemoveRange(removeSeller);
-                _context.SaveChanges();
+                return result;
             }
-            var removeDepartment = _context.Departments.FirstOrDefault(x => x.Id == department.Id);
-            _context.Departments.Remove(removeDepartment);
-            _context.SaveChanges();
+            else
+            {
+                return null!;
+            }
         }
+
     }
 }

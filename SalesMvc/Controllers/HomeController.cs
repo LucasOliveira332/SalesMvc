@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesMvc.Contracts;
 using SalesMvc.Models.Services;
 using SalesMvc.Models.ViewModels;
 using System.Diagnostics;
@@ -10,9 +11,9 @@ namespace SalesMvc.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
-        private readonly SeedingService _seedingServices;
+        private readonly ISeedingService _seedingServices;
 
-        public HomeController(ILogger<HomeController> logger, SeedingService seedingServices)
+        public HomeController(ILogger<HomeController> logger, ISeedingService seedingServices)
         {
             _logger = logger;
             _seedingServices = seedingServices;

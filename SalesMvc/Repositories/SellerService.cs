@@ -15,16 +15,29 @@ namespace SalesMvc.Models.Services
 
         public  List<Seller> FindAll()
         {
-            return  _context.Sellers.OrderBy(x => x.Name).ToList();
+            var result =  _context.Sellers!.OrderBy(x => x.Name).ToList();
+            if (result.Any())
+            {
+                return result;
+            } 
+            else
+            {
+                return null!;  
+            }
         }
-        public Seller Find(int? id)
+        public Seller Find(int id)
         {
-            Seller x = _context.Sellers.Include(x=> x.Department).FirstOrDefault(x => x.Id == id);
+            Seller? x = _context.Sellers!.Include(x=> x.Department).FirstOrDefault(x => x.Id == id);
+
+            if(x == null)
+            {
+                return null!;
+            }
             return x;
         }
         public void Add(Seller seller)
         {
-            _context.Sellers.Add(seller);
+            _context.Sellers!.Add(seller);
             _context.SaveChanges();
         }
 
@@ -32,7 +45,7 @@ namespace SalesMvc.Models.Services
         {
             try
             {
-                var editSeller = _context.Sellers.Update(seller);
+                var editSeller = _context.Sellers!.Update(seller);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -44,14 +57,16 @@ namespace SalesMvc.Models.Services
 
         public void Remove(int id)
         {
-            var removeSeller = _context.Sellers.FirstOrDefault(x => x.Id == id);
-            var listSalesRecords = _context.SalesRecords.Where(x => x.SellerID == id);
-
-            _context.SalesRecords.RemoveRange(listSalesRecords);
-            _context.SaveChanges();
-
-            _context.Remove(removeSeller);
-            _context.SaveChanges();
+            var removeSeller = _context.Sellers!.FirstOrDefault(x => x.Id == id);
+            if(removeSeller != null)
+            {
+                var listSalesRecords = _context.SalesRecords!.Where(x => x.SellerID == id);
+                _context.SalesRecords!.RemoveRange(listSalesRecords);
+                _context.SaveChanges();
+                _context.Remove(removeSeller);
+                _context.SaveChanges();
+            }
+            
         }
     }
 }

@@ -6,16 +6,12 @@
 
 <h1>Departments</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -23,9 +19,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a class="btn btn-danger" asp-action="Remove" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

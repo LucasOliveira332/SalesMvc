@@ -1,65 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesMvc.Contracts;
 using SalesMvc.Models;
 using SalesMvc.Models.Services;
+using SalesMvc.Models.ViewModels;
+using System.Diagnostics;
 
 namespace SalesMvc
 {
     public class DepartmentController : Controller
     {
-        private readonly DepartmentService _departmentService;
+        private readonly IDepartmentService _departmentService;
 
-        public DepartmentController(DepartmentService departmentService)
+        public DepartmentController(IDepartmentService departmentService)
         {
             _departmentService = departmentService;
         }
 
         public IActionResult Index()
         {
-           var listDepartments =  _departmentService.FindAll();
-            return View(listDepartments);
+            var listDepartment = _departmentService.FindAll();
+            if (!listDepartment.Any())
+            {
+                return RedirectToAction(nameof(Error), new { message = "There are no registred Departments" });
+            }
+            return View(listDepartment);
         }
 
-        [HttpGet]
-        public IActionResult Create()
+        public IActionResult Error(string message)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(Department department)
-        {
-            _departmentService.Add(department);
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
-        public IActionResult Remove(int? id)
-        {
-            if(id == null)
-            {
-                return NotFound();
-            }
-            var department = _departmentService.FindById((int)id);
-            if(department != null)
-            {
-                var findDepartment = _departmentService.FindById((int)id);
-                return View(findDepartment);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
-        [HttpPost]
-        public IActionResult Remove(int id)
-        {
-            var department = _departmentService.FindById(id);
-            if (department != null)
-            {
-                _departmentService.Remove(department);
-            }
-            return RedirectToAction(nameof(Index));
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, Message = message });
         }
     }
 }

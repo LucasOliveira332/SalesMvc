@@ -1,9 +1,10 @@
 ﻿using SalesMvc.Data;
 using Microsoft.EntityFrameworkCore;
+using SalesMvc.Contracts;
 
 namespace SalesMvc.Models.Services
 {
-    public class SalesRecordService
+    public class SalesRecordService : ISalesRecordService
     {
         private readonly SalesMvcContext _context;
 
@@ -14,17 +15,19 @@ namespace SalesMvc.Models.Services
 
         public List<SalesRecord> FindAll()
         {
-            return _context.SalesRecords.Include(x => x.Seller).OrderBy(x => x.Seller.Name).ToList();
+            List<SalesRecord>? result = _context.SalesRecords!.Include(x => x.Seller).OrderBy(x => x.Seller.Name).ToList();
+            if (result.Any())
+            {
+                return result;
+            }
+            else
+            {
+                return null!;
+            }
         }
-
-        public SalesRecord Find(int? id)
-        {
-            return _context.SalesRecords.Find(id);
-        }
-
         public List<SalesRecord> FindByDate(DateTime minDate, DateTime maxDate)
         {
-            return _context.SalesRecords.Where(x => x.Date >= minDate && x.Date <= maxDate).Include(x => x.Seller).ToList();
+            return _context.SalesRecords!.Where(x => x.Date >= minDate && x.Date <= maxDate).Include(x => x.Seller).ToList();
         }
     }
 }
